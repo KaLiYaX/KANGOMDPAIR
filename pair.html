@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="whatsapp bot pairing code." />
+  <meta name="keywords" content="pair, whatsapp-bot" />
+  <meta name="author" content="IRON-M4N" />
+  <link rel="icon" href="https://cdn.ironman.my.id/u/uugBEhB.jpeg" type="image/jpeg" />
+  <title>Phone Pairing</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: bodyFadeIn 1s ease-in-out;
+    position: relative;
+}
+
+@keyframes bodyFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.card {
+    background: #1e1e2f;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: slideUp 1.2s ease-out;
+    z-index: 1;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    color: #00ffe1;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { text-shadow: 0 0 10px #00ffe1; }
+    50% { text-shadow: 0 0 20px #00d6c5; }
+}
+
+.card h2 {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: #ffffff;
+}
+
+input[type="text"] {
+    padding: 0.7rem;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 1rem;
+    outline: none;
+    font-size: 1rem;
+    background: #2c3e50;
+    color: white;
+    transition: 0.3s ease;
+    animation: fadeInInput 1.5s ease;
+}
+
+input[type="text"]:focus {
+    box-shadow: 0 0 12px #00ffe1;
+    background: #34495e;
+}
+
+@keyframes fadeInInput {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+a {
+    display: inline-block;
+    background-color: #00ffe1;
+    color: #1e1e2f;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 225, 0.4);
+    animation: bounceIn 1.5s ease;
+}
+
+a:hover {
+    background-color: #00d6c5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 225, 0.6);
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.95); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+#output {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #00ffe1;
+    animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: center;
+    opacity: 0;
+    animation: fadeFooter 2s ease forwards;
+    animation-delay: 1s;
+    z-index: 1;
+}
+
+@keyframes fadeFooter {
+    to { opacity: 1; }
+}
+
+footer span {
+    color: #00ffe1;
+    font-weight: bold;
+}
+
+.bg-text {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: rgba(0, 255, 225, 0.08);
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 0;
+    animation: dropIn 2.5s ease-out forwards;
+}
+
+@keyframes dropIn {
+    to {
+        top: 50px;
+        opacity: 0.1;
+    }
+}
+
+
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.falling-text {
+    position: absolute;
+    top: -40px;
+    font-size: 1.2rem;
+    color: rgba(0, 255, 225, 0.15);
+    font-weight: bold;
+    white-space: nowrap;
+    animation-name: fall;
+    animation-timing-function: linear;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+
+/* Style the Submit button */
+.card a {
+    display: inline-block;
+    background: linear-gradient(135deg, #00ffe1, #00b8ff);
+    color: #0f0f1a;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 255, 225, 0.3);
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+.card a:hover {
+    background: linear-gradient(135deg, #00d6c5, #009fd9);
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 255, 225, 0.5);
+}
+
+/* Style for the output copy button */
+.copy-btn {
+    margin-top: 0.5rem;
+    background: #00ffe1;
+    color: #1b1b2f;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: #00c8b0;
+}
+
+/* Copied confirmation */
+.copy-confirm {
+    color: #00ffe1;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Optional subtle fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    animation: fadeIn 1s ease;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.social-links a i {
+    font-size: 1.2rem;
+}
+
+/* WhatsApp Style */
+a.whatsapp {
+    background-color: #25D366;
+    color: #fff;
+}
+
+a.whatsapp:hover {
+    background-color: #1da851;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(37, 211, 102, 0.5);
+}
+
+/* Telegram Style */
+a.telegram {
+    background-color: #0088cc;
+    color: #fff;
+}
+
+a.telegram:hover {
+    background-color: #007ab8;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 136, 204, 0.5);
+}
+
+.channel-heading {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00ffe1;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    animation: fadeInText 1s ease-in-out;
+    text-shadow: 0 0 5px rgba(0, 255, 225, 0.5);
+}
+
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+input::placeholder {
+    color: #00ffe1;
+    font-style: italic;
+    font-weight: 500;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 3px rgba(0, 255, 225, 0.3);
+}
+
+input:focus::placeholder {
+    opacity: 0.4;
+    transform: translateY(-2px);
+}
+
+
+
+input[type="text"]:focus {
+    border-color: #00d6c5;
+    box-shadow: 0 0 12px rgba(0, 255, 225, 0.6);
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.02);
+}
+input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #00ffe1;
+    border-radius: 12px;
+    color: #00ffe1;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 225, 0.2);
+    margin-top: 1rem;
+}
+
+input::placeholder {
+    color: #00ffe1;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 3px rgba(0, 255, 225, 0.3);
+    white-space: normal;
+}
+
+
+    /* Ensure content visibility */
+    overflow-x: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+  </style>
+  
+</head>
+<body onload="playSound()">
+  <div class="rain-container" id="rainContainer"></div>
+
+  <div class="card">
+    <h3>𝐂𝐈𝐏𝐇𝐄𝐑-𝐌𝐃 𝐏𝐀𝐈𝐑 𝐂𝐎𝐃𝐄</h3>
+    <h2>Enter Phone Number</h2>
+    <input type="text" id="phone" placeholder="Enter your phone example +233557488116" />
+    <a onclick="submitCode()">Submit</a>
+    <div id="output"></div>
+
+    <div class="channel-heading">JOIN MY CHANNELS FOR MORE UPDATES</div>
+    <div class="social-links">
+      <a href="https://whatsapp.com/channel/0029VbAUgm5Fi8xfcJspqi3f" target="_blank" class="whatsapp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="https://t.me/CIPHER_TECH_BOT_MD" target="_blank" class="telegram">
+        <i class="fab fa-telegram-plane"></i> Telegram
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    POWERED BY <span>CIPHERTECH</span> &copy; <span id="currentYear"></span>
+  </footer>
+
+  <audio id="entranceSound" src="https://cdn.pixabay.com/audio/2022/10/31/audio_8cf225e1c1.mp3" preload="auto"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    function cut(input) {
+      return input.replace(/\D/g, "");
+    }
+
+    async function submitCode() {
+      const phoneInput = document.getElementById("phone");
+      const number = cut(phoneInput.value);
+      const output = document.getElementById("output");
+
+      if (!number || number.length < 11) {
+        output.innerHTML = `<p style="color:#ff4d4d;font-weight:bold;">❗ Invalid or missing number</p>`;
+        return;
+      }
+
+      try {
+        output.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+        const res = await axios(`/code?number=${number}`);
+        const code = res.data.code || "❗ Service Unavailable";
+
+        output.innerHTML = `
+          <p>Code: <span style="color:white;font-weight:bold">${code}</span></p>
+          <button class="copy-btn" onclick="copyToClipboard('${code}')">Copy to Clipboard</button>
+          <p id="copy-confirm" class="copy-confirm" style="display:none;color:#00ffe1;">✔️ Copied!</p>
+        `;
+      } catch (err) {
+        output.innerHTML = `<p style="color:#ff4d4d">❗ Error: ${err.message}</p>`;
+      }
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById("copy-confirm").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("copy-confirm").style.display = "none";
+        }, 1000);
+      });
+    }
+
+    function playSound() {
+      const sound = document.getElementById("entranceSound");
+      sound.volume = 0.5;
+      sound.play();
+    }
+
+    // Floating text animation
+    setInterval(() => {
+      const container = document.getElementById("rainContainer");
+      const el = document.createElement("div");
+      el.className = "falling-text";
+      el.innerText = "DEVELOPED BY CIPHERTECH";
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = 3 + Math.random() * 3 + "s";
+      el.style.opacity = 0.2 + Math.random() * 0.3;
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 7000);
+    }, 500);
+
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
